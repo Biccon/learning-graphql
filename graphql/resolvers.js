@@ -1,16 +1,11 @@
-import { getMovies, getById, addMovie, deleteMovie } from "./db";
+import { getMovies, getMovie, getSuggestions } from "./db";
 
 const resolvers = {
   Query: {
-    movies: () => getMovies(),
-    movie: (_, { id }) => getById(id)
-  },
-  Mutation: {
-    addMovie: (_, { name, score }) => addMovie(name, score),
-    deleteMovie: (_, { id }) => deleteMovie(id)
+    movies: (_, { rating, limit }) => getMovies(limit, rating),
+    movie: (_, { id }) => getMovie(id),
+    suggestions: (_, { id }) => getSuggestions(id)
   }
 };
 
 export default resolvers;
-
-//https://www.youtube.com/watch?v=P7NDDAfAQoo 3:50 시청중 2018.10.14 20:53
